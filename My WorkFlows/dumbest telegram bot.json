@@ -3,42 +3,44 @@
   "nodes": [
     {
       "parameters": {
-        "chatId": "YOUR_TELEGRAM_CHAT_ID",
-        "text": "=text: {{ $json.result.text }}",
+        "chatId": "",
+        "text": "=you have written: {{ $json.message.text }}",
         "additionalFields": {
-          "appendAttribution": false
+          "appendAttribution": false,
+          "disable_notification": false
         }
       },
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        128,
-        -96
+        368,
+        80
       ],
-      "id": "f92f22e2-dea6-4811-92c5-1ba8f7b49a86",
+      "id": "41a62004-9056-4a19-abb6-074c9ef04140",
       "name": "Send a text message",
-      "webhookId": "YOUR_WEBHOOK_ID",
-      "credentials": {
-        "telegramApi": {
-          "name": "YOUR_TELEGRAM_BOT_CREDENTIAL"
-        }
-      }
+      "webhookId": "YOUR_WEBHOOK_ID"
     },
     {
-      "parameters": {},
-      "type": "n8n-nodes-base.manualTrigger",
-      "typeVersion": 1,
+      "parameters": {
+        "updates": [
+          "*"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
       "position": [
-        -240,
-        -176
+        -16,
+        -32
       ],
-      "id": "62497bae-f48e-4027-9593-3dfaa238a582",
-      "name": "When clicking ‘Execute workflow’"
+      "id": "a40bb05e-b43d-4dee-bfc3-199e9374a50b",
+      "name": "Telegram Trigger",
+      "webhookId": "95242486-2a8b-4e86-96c4-aa4ecbe75c86"
     }
   ],
   "pinData": {},
   "connections": {
-    "When clicking ‘Execute workflow’": {
+    "Telegram Trigger": {
       "main": [
         [
           {
@@ -48,22 +50,17 @@
           }
         ]
       ]
-    },
-    "Send a text message": {
-      "main": [
-        []
-      ]
     }
   },
-  "active": false,
+  "active": true,
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "28d3b8c6-e152-47b7-9fe0-90ad6292898b",
+  "versionId": "54c49465-eae8-42da-961c-fb24a2949f13",
   "meta": {
     "templateCredsSetupCompleted": true,
-    "instanceId": "YOUR_INSTANCE_ID"
+    "instanceId": "b38ddab832d36c3020e0a6ca49c08518c61b5e620d79ea6565bbbeaaa290bd13"
   },
-  "id": "QyNiahv7ZfRYwP5U",
+  "id": "ARAppiqJq2oahJgN",
   "tags": []
 }
