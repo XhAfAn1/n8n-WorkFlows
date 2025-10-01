@@ -1,0 +1,119 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "resource": "message",
+        "guildId": {
+          "__rl": true,
+          "value": "740228316388130837",
+          "mode": "list",
+          "cachedResultName": "XhAfAn's",
+          "cachedResultUrl": "https://discord.com/channels/740228316388130837"
+        },
+        "channelId": {
+          "__rl": true,
+          "value": "740228643846094868",
+          "mode": "list",
+          "cachedResultName": "text",
+          "cachedResultUrl": "https://discord.com/channels/740228316388130837/740228643846094868"
+        },
+        "content": "={{ $json.reply }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.discord",
+      "typeVersion": 2,
+      "position": [
+        272,
+        96
+      ],
+      "id": "349eddbc-d1cb-45be-9d0a-95dfbf90fd4e",
+      "name": "Send a message",
+      "webhookId": "cc6311b4-d719-4e3f-a001-19b718db4f76",
+      "credentials": {
+        "discordBotApi": {
+          "id": "oQRzn4NFvgBp14lP",
+          "name": "Discord Bot account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -336,
+        32
+      ],
+      "id": "ad9d1b50-f6b2-461c-912b-33e4884db530",
+      "name": "Telegram Trigger",
+      "webhookId": "391ce25e-b0c6-4222-adad-697cc0b3347a",
+      "credentials": {
+        "telegramApi": {
+          "id": "iHb7uw7u8fLBihka",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Get all incoming items\nconst items = $input.all();\n\n// Grab the first item\nconst input = items[0]?.json || {};\nconst msg = input.message.text || \"\";\n\n// Only reply if it starts with \"meeting\"\nif (msg.toLowerCase().startsWith(\"meeting\")) {\n  return [\n    {\n      json: {\n        reply: msg\n      }\n    }\n  ];\n}\n\n// If not meeting, return empty array → next node won’t run\nreturn [];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -32,
+        -80
+      ],
+      "id": "bdcb9c35-cea7-48c6-a690-b9b5b33f67f2",
+      "name": "Code in JavaScript",
+      "alwaysOutputData": false
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message": {
+      "main": [
+        []
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "1945a43b-d526-4aac-9e46-2036fa785ff1",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "d2dac748d2e60e5513a9c0b5f2d6849aaed441152f5fa395343bb36748a8c6a6"
+  },
+  "id": "wA1lvx6uwbsBH3bc",
+  "tags": []
+}
